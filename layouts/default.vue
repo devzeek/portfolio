@@ -1,106 +1,151 @@
 <template>
-  <div class="relative overflow-hidden">
-    <Popover as="header" class="relative">
-      <div class="bg-blue-200 pt-6 pb-6 sm:pb-6">
-        <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-6" aria-label="Global">
-          <div class="flex flex-1 items-center">
-            <div class="flex w-full items-center justify-between md:w-auto">
-              <NuxtLink to="/">
-                <span class="sr-only">Your Name</span>
-                <img class="h-8 w-auto sm:h-10" src="https://placeholder.pics/svg/300x200/78D2FF-FFB3FD/logo" alt="" />
-              </NuxtLink>
-              <div class="-mr-2 flex items-center md:hidden">
-                <PopoverButton
-                  class="focus-ring-inset relative inline-flex items-center justify-center rounded-md bg-blue-200 p-2 text-pink-400 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-white"
-                >
-                  <span class="absolute -inset-0.5" />
-                  <span class="sr-only">Open main menu</span>
-                  <Bars3Icon class="h-6 w-6" aria-hidden="true" />
-                </PopoverButton>
+  <div class="flex flex-col flex-1 w-full min-h-screen">
+    <div class="relative flex flex-col flex-1 w-full min-h-screen overflow-hidden">
+      <Popover as="header" class="relative">
+        <div class="pt-6 pb-6 bg-blue-200 sm:pb-6">
+          <nav class="relative flex items-center justify-between px-6 mx-auto max-w-7xl" aria-label="Global">
+            <div class="flex items-center flex-1">
+              <div class="flex items-center justify-between w-full md:w-auto">
+                <NuxtLink to="/">
+                  <span class="sr-only">Junoon</span>
+                  <img
+                    class="w-auto h-8 sm:h-10"
+                    src="https://placeholder.pics/svg/300x200/78D2FF-FFB3FD/logo"
+                    alt=""
+                  />
+                </NuxtLink>
+                <div class="flex items-center -mr-2 md:hidden">
+                  <PopoverButton
+                    class="relative inline-flex items-center justify-center p-2 text-pink-400 bg-blue-200 rounded-md focus-ring-inset hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-white"
+                  >
+                    <span class="absolute -inset-0.5" />
+                    <span class="sr-only">Open main menu</span>
+                    <Bars3Icon class="w-6 h-6" aria-hidden="true" />
+                  </PopoverButton>
+                </div>
               </div>
-            </div>
-            <div class="hidden space-x-8 md:ml-10 md:flex">
-              <template v-for="item in navigation">
-                <a
-                  v-if="item.href === '/' && route.name === 'index'"
-                  :key="item.name"
-                  href="#art"
-                  class="text-base font-medium text-pink-400 hover:text-pink-500"
-                  >My Art</a
-                >
-                <NuxtLink
-                  v-else
-                  :key="item.href"
-                  :to="item.href"
-                  class="text-base font-medium text-pink-400 hover:text-pink-500"
-                  >{{ item.name }}</NuxtLink
-                >
-              </template>
-            </div>
-          </div>
-        </nav>
-      </div>
+              <div class="hidden space-x-8 md:ml-10 md:flex">
+                <template v-for="item in navigation">
+                  <a
+                    v-if="item.href === '/' && route.name === 'index'"
+                    :key="item.name"
+                    href="#intro"
+                    class="text-base font-medium text-pink-400 hover:text-pink-500"
+                    >Introduction</a
+                  >
 
-      <transition
-        enter-active-class="duration-150 ease-out"
-        enter-from-class="opacity-0 scale-95"
-        enter-to-class="opacity-100 scale-100"
-        leave-active-class="duration-100 ease-in"
-        leave-from-class="opacity-100 scale-100"
-        leave-to-class="opacity-0 scale-95"
-      >
-        <PopoverPanel focus class="absolute inset-x-0 top-0 z-10 origin-top transform p-2 transition md:hidden">
-          <div class="overflow-hidden rounded-lg bg-blue-200 shadow-md ring-1 ring-black ring-opacity-5">
-            <div class="flex items-center justify-between px-5 pt-4">
-              <div>
-                <img class="h-8 w-auto sm:h-10" src="https://placeholder.pics/svg/300x200/78D2FF-FFB3FD/logo" alt="" />
-              </div>
-              <div class="-mr-2">
-                <PopoverButton
-                  class="relative inline-flex items-center justify-center rounded-md bg-blue-200 p-2 text-pink-400 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-400"
-                >
-                  <span class="absolute -inset-0.5" />
-                  <span class="sr-only">Close menu</span>
-                  <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-                </PopoverButton>
-              </div>
-            </div>
-            <div class="pb-6 pt-5">
-              <div class="space-y-1 px-2">
-                <a
-                  v-for="item in navigation"
-                  :key="item.name"
-                  :href="item.href"
-                  class="block rounded-md px-3 py-2 text-base font-medium text-pink-400 hover:bg-blue-100"
-                  >{{ item.name }}</a
-                >
-              </div>
-            </div>
-          </div>
-        </PopoverPanel>
-      </transition>
-    </Popover>
+                  <a
+                    v-if="item.href === '/' && route.name === 'index'"
+                    :key="item.name"
+                    href="#art"
+                    class="text-base font-medium text-pink-400 hover:text-pink-500"
+                    >My Art</a
+                  >
 
-    <slot />
-  </div>
-  <footer class="bg-blue-200">
-    <div class="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
-      <div class="flex justify-center space-x-6 md:order-2">
-        <a v-for="item in footer" :key="item.name" :href="item.href" class="text-pink-400 hover:text-white">
-          <span class="sr-only">{{ item.name }}</span>
-          <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
-        </a>
-      </div>
-      <div class="mt-8 md:order-1 md:mt-0">
-        <p class="text-center text-xs leading-5 text-pink-400">&copy; 2024 Your Name. All rights reserved.</p>
-      </div>
+                  <NuxtLink
+                    v-else
+                    :key="item.href"
+                    :to="item.href"
+                    class="text-base font-medium text-pink-400 hover:text-pink-500"
+                    >{{ item.name }}</NuxtLink
+                  >
+                </template>
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <transition
+          enter-active-class="duration-150 ease-out"
+          enter-from-class="scale-95 opacity-0"
+          enter-to-class="scale-100 opacity-100"
+          leave-active-class="duration-100 ease-in"
+          leave-from-class="scale-100 opacity-100"
+          leave-to-class="scale-95 opacity-0"
+        >
+          <PopoverPanel
+            v-slot="{ close }"
+            ocus
+            class="absolute inset-x-0 top-0 z-10 p-2 transition origin-top transform md:hidden"
+          >
+            <div class="overflow-hidden bg-blue-200 rounded-lg shadow-md ring-1 ring-black ring-opacity-5">
+              <div class="flex items-center justify-between px-5 pt-4">
+                <div>
+                  <img
+                    class="w-auto h-8 sm:h-10"
+                    src="https://placeholder.pics/svg/300x200/78D2FF-FFB3FD/logo"
+                    alt=""
+                  />
+                </div>
+                <div class="-mr-2">
+                  <PopoverButton
+                    class="relative inline-flex items-center justify-center p-2 text-pink-400 bg-blue-200 rounded-md hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-400"
+                  >
+                    <span class="absolute -inset-0.5" />
+                    <span class="sr-only">Close menu</span>
+                    <XMarkIcon class="w-6 h-6" aria-hidden="true" />
+                  </PopoverButton>
+                </div>
+              </div>
+              <div class="pt-5 pb-6">
+                <div class="px-2 space-y-1">
+                  <template v-for="item in navigation">
+                    <a
+                      v-if="item.href === '/' && route.name === 'index'"
+                      :key="item.name"
+                      href="#intro"
+                      class="block px-3 py-2 text-base font-medium text-pink-400 rounded-md hover:bg-blue-100"
+                      @click="close"
+                      >Introduction</a
+                    >
+
+                    <a
+                      v-if="item.href === '/' && route.name === 'index'"
+                      :key="item.name"
+                      href="#art"
+                      class="block px-3 py-2 text-base font-medium text-pink-400 rounded-md hover:bg-blue-100"
+                      @click="close"
+                      >My Art</a
+                    >
+
+                    <NuxtLink
+                      v-else
+                      :key="item.href"
+                      :to="item.href"
+                      class="block px-3 py-2 text-base font-medium text-pink-400 rounded-md hover:bg-blue-100"
+                      @click="close"
+                      >{{ item.name }}</NuxtLink
+                    >
+                  </template>
+                </div>
+              </div>
+            </div>
+          </PopoverPanel>
+        </transition>
+      </Popover>
+
+      <main class="flex flex-col items-center flex-1 w-full">
+        <slot />
+      </main>
     </div>
-  </footer>
+    <footer class="bg-blue-200">
+      <div class="px-6 py-12 mx-auto max-w-7xl md:flex md:items-center md:justify-between lg:px-8">
+        <div class="flex justify-center space-x-6 md:order-2">
+          <a v-for="item in footer" :key="item.name" :href="item.href" class="text-pink-400 hover:text-pink-600">
+            <span class="sr-only">{{ item.name }}</span>
+            <component :is="item.icon" class="w-6 h-6" aria-hidden="true" />
+          </a>
+        </div>
+        <div class="mt-8 md:order-1 md:mt-0">
+          <p class="text-xs leading-5 text-center text-pink-400">&copy; 2024 Junoon. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
 </template>
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { ChevronRightIcon } from '@heroicons/vue/20/solid'
 import { defineComponent, h } from 'vue'
 const route = useRoute()
 const footer = [
@@ -119,27 +164,13 @@ const footer = [
     }),
   },
   {
-    name: 'X',
+    name: 'tictok',
     href: '#',
     icon: defineComponent({
       render: () =>
-        h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [
+        h('svg', { fill: 'currentColor', viewBox: '0 0 512 512' }, [
           h('path', {
-            d: 'M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z',
-          }),
-        ]),
-    }),
-  },
-  {
-    name: 'YouTube',
-    href: '#',
-    icon: defineComponent({
-      render: () =>
-        h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [
-          h('path', {
-            'fill-rule': 'evenodd',
-            d: 'M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z',
-            'clip-rule': 'evenodd',
+            d: 'M412.19,118.66a109.27,109.27,0,0,1-9.45-5.5,132.87,132.87,0,0,1-24.27-20.62c-18.1-20.71-24.86-41.72-27.35-56.43h.1C349.14,23.9,350,16,350.13,16H267.69V334.78c0,4.28,0,8.51-.18,12.69,0,.52-.05,1-.08,1.56,0,.23,0,.47-.05.71,0,.06,0,.12,0,.18a70,70,0,0,1-35.22,55.56,68.8,68.8,0,0,1-34.11,9c-38.41,0-69.54-31.32-69.54-70s31.13-70,69.54-70a68.9,68.9,0,0,1,21.41,3.39l.1-83.94a153.14,153.14,0,0,0-118,34.52,161.79,161.79,0,0,0-35.3,43.53c-3.48,6-16.61,30.11-18.2,69.24-1,22.21,5.67,45.22,8.85,54.73v.2c2,5.6,9.75,24.71,22.38,40.82A167.53,167.53,0,0,0,115,470.66v-.2l.2.2C155.11,497.78,199.36,496,199.36,496c7.66-.31,33.32,0,62.46-13.81,32.32-15.31,50.72-38.12,50.72-38.12a158.46,158.46,0,0,0,27.64-45.93c7.46-19.61,9.95-43.13,9.95-52.53V176.49c1,.6,14.32,9.41,14.32,9.41s19.19,12.3,49.13,20.31c21.48,5.7,50.42,6.9,50.42,6.9V131.27C453.86,132.37,433.27,129.17,412.19,118.66Z',
           }),
         ]),
     }),
@@ -153,10 +184,10 @@ const navigation = [
 const art = [
   {
     id: 1,
-    name: 'Art piece 1',
+    name: 'The art piece',
     href: '#',
     description: 'Art piece 1 descriptions Qui irure qui Lorem cupidatat commodo.',
-    imageSrc: 'https://placehold.co/400?text=Art+piece',
+    imageSrc: 'watercolor-1.jpg',
     imageAlt: 'Art piece 1 alt text.',
   },
   {
